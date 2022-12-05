@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
+import { newAnecdote } from './reducers/anecdoteReducer'
 
 const App = () => {
   const anecdotes = useSelector(state => state)
@@ -14,7 +15,7 @@ const App = () => {
     const content = e.target.anecdote.value
     e.target.anecdote.value = ""
     console.log("create", content)
-    dispatch({type: "CREATE", data:{content}})
+    dispatch(newAnecdote(content))
   }
 
   return (
