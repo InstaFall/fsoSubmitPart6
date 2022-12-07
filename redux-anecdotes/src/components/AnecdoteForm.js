@@ -9,6 +9,8 @@ const AnecdoteForm = () => {
         e.target.anecdote.value = ""
         console.log("create", content)
         dispatch({type: "anecdotes/newAnecdote", payload: content})
+        dispatch({ type: "notification/setMessage", payload: `${content} is created!`})
+        setTimeout(() => dispatch({type: "notification/reset"}),5000)
       }
 
     return (
