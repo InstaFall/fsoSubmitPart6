@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 const AnecdoteList = () => {
     const anecdotes = useSelector(state => state.anecdotes)
+    const filter = useSelector(state => state.filter)
     const dispatch = useDispatch()
 
     const vote = ({content, id}) => {
@@ -10,9 +11,11 @@ const AnecdoteList = () => {
         dispatch({ type: "notification/setMessage", payload: `You voted for ${content}`})
         setTimeout(() => dispatch({ type: "notification/reset" }),5000)
     }
+
+    const anecdotesToShow = filter !== "" ? anecdotes.filter((e) => e.content.toLowerCase().includes(filter.toLowerCase())) : anecdotes
     return (
         <>
-        {anecdotes.map(anecdote =>
+        {anecdotesToShow.map(anecdote =>
             <div key={anecdote.id}>
               <div>
                 {anecdote.content}
